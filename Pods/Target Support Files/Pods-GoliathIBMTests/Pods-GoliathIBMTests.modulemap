@@ -1,0 +1,6 @@
+framework module Pods_GoliathIBMTests {
+  umbrella header "Pods-GoliathIBMTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

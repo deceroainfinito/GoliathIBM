@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import Moya
 
 class ViewController: UITableViewController {
-  
+
+  let nProvider = MoyaProvider<GoliathAPI>()
+
   var transactionViewModels = [TransactionViewModel]()
   
   override func viewDidLoad() {
@@ -39,29 +42,40 @@ class ViewController: UITableViewController {
   }
   
   func fetchData() {
-    RatesService.shared.fetchRates { (result) in
+
+    nProvider.request(.rates) { (result) in
       switch result {
-      case .success(let rates):
-        DispatchQueue.global(qos: .utility).async {
-          try! StorageManager.storeRates(rates)
-        }
       case .failure(let error):
         print(error.localizedDescription)
+      case .success(let ratesResponse):
+        DispatchQueue.global(qos: .utility).async {
+          do {
+            let parsedRates = try ratesResponse.map([Rate].self)
+            try StorageManager.storeRates(parsedRates)
+          } catch {
+            print(error.localizedDescription)
+          }
+        }
       }
     }
-    
-    TransactionService.shared.fetchTransactions { (result) in
+
+    nProvider.request(.transactions) { (result) in
       switch result {
-      case .success(let transactions):
-        DispatchQueue.global(qos: .utility).async {
-          try! StorageManager.storeTransactions(transactions)
-        }
-        DispatchQueue.main.async {
-          self.transactionViewModels = transactions.unique().map({ TransactionViewModel(transaction: $0) })
-          self.tableView.reloadData()
-        }
       case .failure(let error):
         print(error.localizedDescription)
+      case .success(let tranResponse):
+        do {
+          let transactions = try tranResponse.map([Transaction].self)
+          DispatchQueue.global(qos: .utility).async {
+            try! StorageManager.storeTransactions(transactions)
+          }
+          DispatchQueue.main.async {
+            self.transactionViewModels = transactions.unique().map({ TransactionViewModel(transaction: $0) })
+            self.tableView.reloadData()
+          }
+        } catch {
+          print(error.localizedDescription)
+        }
       }
     }
   }

@@ -8,14 +8,6 @@
 
 import UIKit
 
-let environment: NetworkServiceEnvironment = {
-  #if targetEnvironment(simulator)
-    return NetworkServiceEnvironment.simulator
-  #else
-    return NetworkServiceEnvironment.mobile
-  #endif
-}()
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
