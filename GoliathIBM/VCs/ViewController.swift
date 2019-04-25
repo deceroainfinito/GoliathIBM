@@ -11,6 +11,8 @@ import Moya
 
 class ViewController: UITableViewController {
 
+  weak var coordinator: MainCoordinator?
+
   let nProvider = MoyaProvider<GoliathAPI>()
 
   var transactionViewModels = [TransactionViewModel]()
@@ -95,9 +97,6 @@ extension ViewController {
   }
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let vc = ProductTableViewController()
-    vc.productName = transactionViewModels[indexPath.row].name
-    
-    navigationController?.pushViewController(vc, animated: true)
+    coordinator?.productTransactions(transactionViewModels[indexPath.row].name)
   }
 }
