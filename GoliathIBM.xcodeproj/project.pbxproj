@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		1A044661226D4F4700E9A843 /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A044660226D4F4700E9A843 /* Money.swift */; };
+		1A0495C4227297D2008B89F2 /* ProductsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0495C3227297D2008B89F2 /* ProductsInteractor.swift */; };
+		1A0495C82272998A008B89F2 /* ProductsViewInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0495C72272998A008B89F2 /* ProductsViewInterface.swift */; };
+		1A0495CA22729B8F008B89F2 /* ProductsModuleInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0495C922729B8F008B89F2 /* ProductsModuleInterface.swift */; };
+		1A0495CD22729D66008B89F2 /* ProductsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0495CC22729D66008B89F2 /* ProductsPresenter.swift */; };
 		1A8820A2226BDDB800CA2D67 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8820A1226BDDB800CA2D67 /* StorageService.swift */; };
 		1A8820A4226BE7F800CA2D67 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8820A3226BE7F800CA2D67 /* Extensions.swift */; };
 		1A8820A6226BF28600CA2D67 /* ProductTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8820A5226BF28600CA2D67 /* ProductTableViewController.swift */; };
@@ -51,6 +55,10 @@
 /* Begin PBXFileReference section */
 		172372C4B93975FB2B0E6537 /* Pods_GoliathIBM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoliathIBM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A044660226D4F4700E9A843 /* Money.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Money.swift; sourceTree = "<group>"; };
+		1A0495C3227297D2008B89F2 /* ProductsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsInteractor.swift; sourceTree = "<group>"; };
+		1A0495C72272998A008B89F2 /* ProductsViewInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewInterface.swift; sourceTree = "<group>"; };
+		1A0495C922729B8F008B89F2 /* ProductsModuleInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsModuleInterface.swift; sourceTree = "<group>"; };
+		1A0495CC22729D66008B89F2 /* ProductsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsPresenter.swift; sourceTree = "<group>"; };
 		1A8820A1226BDDB800CA2D67 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		1A8820A3226BE7F800CA2D67 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1A8820A5226BF28600CA2D67 /* ProductTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewController.swift; sourceTree = "<group>"; };
@@ -108,6 +116,71 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A0495CB22729BDE008B89F2 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				1A0495C3227297D2008B89F2 /* ProductsInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		1A0495CE2272A53D008B89F2 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				1A0495CC22729D66008B89F2 /* ProductsPresenter.swift */,
+				1A0495C922729B8F008B89F2 /* ProductsModuleInterface.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		1A0495CF2272A550008B89F2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1A0495D12272ACF1008B89F2 /* View */,
+				1A0495CB22729BDE008B89F2 /* Interactor */,
+				1A0495CE2272A53D008B89F2 /* Presenter */,
+				1A0495D22272AD2D008B89F2 /* Entity */,
+			);
+			path = Products;
+			sourceTree = "<group>";
+		};
+		1A0495D02272A55C008B89F2 /* Viper Modules */ = {
+			isa = PBXGroup;
+			children = (
+				1A0495CF2272A550008B89F2 /* Products */,
+			);
+			path = "Viper Modules";
+			sourceTree = "<group>";
+		};
+		1A0495D12272ACF1008B89F2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1AF22A11226AA2E100EFE163 /* ViewModel */,
+				1AF229C1226A48D700EFE163 /* ViewController.swift */,
+				1A0495C72272998A008B89F2 /* ProductsViewInterface.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1A0495D22272AD2D008B89F2 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				1A044660226D4F4700E9A843 /* Money.swift */,
+				1AF229DF226A4C6300EFE163 /* Rate.swift */,
+				1AF229E2226A4D5300EFE163 /* Transaction.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		1A0495D32272AD83008B89F2 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				1ACA312F22727202003799EE /* Network Service */,
+				1AF8FC7E226CF3C60061444D /* Storage Service */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		1ACA312F22727202003799EE /* Network Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,18 +220,16 @@
 		1AF229BE226A48D700EFE163 /* GoliathIBM */ = {
 			isa = PBXGroup;
 			children = (
-				1ACA312F22727202003799EE /* Network Service */,
-				1AF8FC7E226CF3C60061444D /* Storage Service */,
 				1AF229BF226A48D700EFE163 /* AppDelegate.swift */,
 				1ACA31322272796E003799EE /* Coordinator */,
-				1AF229E1226A4D4600EFE163 /* Model */,
-				1AF22A11226AA2E100EFE163 /* ViewModel */,
 				1AF229E4226A4E3F00EFE163 /* VCs */,
 				1AF229C3226A48D700EFE163 /* Main.storyboard */,
 				1AF229C6226A48D900EFE163 /* Assets.xcassets */,
 				1AF229C8226A48D900EFE163 /* LaunchScreen.storyboard */,
 				1AF229CB226A48D900EFE163 /* Info.plist */,
 				1AF8FC7F226CF3D40061444D /* Extensions and Utils */,
+				1A0495D02272A55C008B89F2 /* Viper Modules */,
+				1A0495D32272AD83008B89F2 /* Services */,
 			);
 			path = GoliathIBM;
 			sourceTree = "<group>";
@@ -182,20 +253,9 @@
 			path = GoliathIBMTests;
 			sourceTree = "<group>";
 		};
-		1AF229E1226A4D4600EFE163 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				1A044660226D4F4700E9A843 /* Money.swift */,
-				1AF229DF226A4C6300EFE163 /* Rate.swift */,
-				1AF229E2226A4D5300EFE163 /* Transaction.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		1AF229E4226A4E3F00EFE163 /* VCs */ = {
 			isa = PBXGroup;
 			children = (
-				1AF229C1226A48D700EFE163 /* ViewController.swift */,
 				1A8820A5226BF28600CA2D67 /* ProductTableViewController.swift */,
 			);
 			path = VCs;
@@ -431,12 +491,16 @@
 				1AF229E0226A4C6300EFE163 /* Rate.swift in Sources */,
 				1AF229E6226A4E7100EFE163 /* LightNavController.swift in Sources */,
 				1A8820A8226BF65E00CA2D67 /* RatesUtil.swift in Sources */,
+				1A0495CD22729D66008B89F2 /* ProductsPresenter.swift in Sources */,
+				1A0495C82272998A008B89F2 /* ProductsViewInterface.swift in Sources */,
+				1A0495C4227297D2008B89F2 /* ProductsInteractor.swift in Sources */,
 				1AF229C2226A48D700EFE163 /* ViewController.swift in Sources */,
 				1A8820A4226BE7F800CA2D67 /* Extensions.swift in Sources */,
 				1AF229E3226A4D5300EFE163 /* Transaction.swift in Sources */,
 				1A044661226D4F4700E9A843 /* Money.swift in Sources */,
 				1A8820A2226BDDB800CA2D67 /* StorageService.swift in Sources */,
 				1ACA313122727513003799EE /* MainCoordinator.swift in Sources */,
+				1A0495CA22729B8F008B89F2 /* ProductsModuleInterface.swift in Sources */,
 				1AF22A0C226A9D9100EFE163 /* TransactionViewModel.swift in Sources */,
 				1AF229C0226A48D700EFE163 /* AppDelegate.swift in Sources */,
 			);

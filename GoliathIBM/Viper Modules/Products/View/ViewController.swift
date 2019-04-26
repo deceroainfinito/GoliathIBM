@@ -11,20 +11,18 @@ import Moya
 
 class ViewController: UITableViewController {
 
-  weak var coordinator: MainCoordinator?
-
-  let nProvider = MoyaProvider<GoliathAPI>()
+  var eventHandler: ProductsModuleInterface?
 
   var transactionViewModels = [TransactionViewModel]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    setupTableView()
-    setupUI()
-    fetchData()
+
+    eventHandler?.setupTableView()
+    eventHandler?.setupUI()
+    eventHandler?.fetchData()
   }
-  
+
   func setupTableView() {
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TransactionCell")
   }
@@ -42,45 +40,6 @@ class ViewController: UITableViewController {
       .foregroundColor: UIColor.white,
     ]
   }
-  
-  func fetchData() {
-
-    nProvider.request(.rates) { (result) in
-      switch result {
-      case .failure(let error):
-        print(error.localizedDescription)
-      case .success(let ratesResponse):
-        DispatchQueue.global(qos: .utility).async {
-          do {
-            let parsedRates = try ratesResponse.map([Rate].self)
-            try StorageManager.storeRates(parsedRates)
-          } catch {
-            print(error.localizedDescription)
-          }
-        }
-      }
-    }
-
-    nProvider.request(.transactions) { (result) in
-      switch result {
-      case .failure(let error):
-        print(error.localizedDescription)
-      case .success(let tranResponse):
-        do {
-          let transactions = try tranResponse.map([Transaction].self)
-          DispatchQueue.global(qos: .utility).async {
-            try! StorageManager.storeTransactions(transactions)
-          }
-          DispatchQueue.main.async {
-            self.transactionViewModels = transactions.unique().map({ TransactionViewModel(transaction: $0) })
-            self.tableView.reloadData()
-          }
-        } catch {
-          print(error.localizedDescription)
-        }
-      }
-    }
-  }
 }
 
 extension ViewController {
@@ -97,6 +56,14 @@ extension ViewController {
   }
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    coordinator?.productTransactions(transactionViewModels[indexPath.row].name)
+    eventHandler?.selectProduct(transactionViewModels[indexPath.row].name)
+  }
+}
+
+
+extension ViewController: ProductsViewInterface {
+  func showProducts(_ products: [TransactionViewModel]) {
+    self.transactionViewModels = products
+    self.tableView.reloadData()
   }
 }

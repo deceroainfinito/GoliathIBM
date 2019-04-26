@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Moya
 
 protocol Coordinator {
   var childCoordinators: [Coordinator] { get set }
@@ -25,8 +26,17 @@ class MainCoordinator: Coordinator {
 
   func start() {
     let vc = ViewController()
+    let productInteractor = ProductsInteractor()
+    let presenter = ProductsPresenter()
 
-    vc.coordinator = self
+    presenter.coordinator = self
+    presenter.productsInteractor = productInteractor
+    presenter.userInterface = vc
+
+    productInteractor.output = presenter
+    productInteractor.networkService = MoyaProvider<GoliathAPI>()
+
+    vc.eventHandler = presenter
 
     navigationController.pushViewController(vc, animated: true)
   }
